@@ -291,3 +291,29 @@ class MinStack {
 //    
 //    return max(left, right) + 1
 //}
+
+var stones = [2,7,4,1,8,1]
+func lastStoneWeight(_ stones: [Int]) -> Int {
+      var stones = stones
+    
+    while stones.count > 1 {
+        stones = stones.sorted(by: >)
+        
+        let heaviest = stones[0]
+        let secondHeaviest = stones[1]
+        
+        if heaviest == secondHeaviest {
+            stones = Array(stones[2...])
+        } else {
+            stones[0] = heaviest - secondHeaviest
+            stones.remove(at: 1)
+        }
+    }
+    
+    if !stones.isEmpty {
+        return stones[0]
+    }
+    return 0
+}
+
+lastStoneWeight(stones)
